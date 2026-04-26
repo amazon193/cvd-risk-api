@@ -22,7 +22,6 @@ if not os.path.exists('unet_model.h5'):
         id="1pEEdGBJBsC9IrTENSO1li75sdhPkpZHQ",
         output="unet_model.h5",
         quiet=False,
-        fuzzy=True
     )
 
 if not os.path.exists('scaler.pkl'):
@@ -30,7 +29,6 @@ if not os.path.exists('scaler.pkl'):
         id="10BvriDIde-6M0_DgPDHX5MMc8KW6U-9z",
         output="scaler.pkl",
         quiet=False,
-        fuzzy=True
     )
 
 if not os.path.exists('classifier.pkl'):
@@ -38,7 +36,6 @@ if not os.path.exists('classifier.pkl'):
         id="1Ffxs3HVyHpigYYo9cXd5nt8HTaVMz_3V",
         output="classifier.pkl",
         quiet=False,
-        fuzzy=True
     )
 
 unet   = tf.keras.models.load_model('unet_model.h5')
