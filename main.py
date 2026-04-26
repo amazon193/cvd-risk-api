@@ -1,3 +1,26 @@
+import gdown
+import os
+
+# Google Drive file IDs (paste yours here)
+UNET_ID       = "https://drive.google.com/file/d/1pEEdGBJBsC9IrTENSO1li75sdhPkpZHQ/view?usp=drive_link"
+CLF_ID     = "https://drive.google.com/file/d/1Ffxs3HVyHpigYYo9cXd5nt8HTaVMz_3V/view?usp=drive_link"
+SCALER_ID        = "https://drive.google.com/file/d/10BvriDIde-6M0_DgPDHX5MMc8KW6U-9z/view?usp=drive_link"
+
+# Download models if not already present
+if not os.path.exists('unet_model.h5'):
+    gdown.download(
+        f"https://drive.google.com/uc?id={UNET_ID}",
+        'unet_model.h5', quiet=False)
+
+if not os.path.exists('scaler.pkl'):
+    gdown.download(
+        f"https://drive.google.com/uc?id={SCALER_ID}",
+        'scaler.pkl', quiet=False)
+
+if not os.path.exists('classifier.pkl'):
+    gdown.download(
+        f"https://drive.google.com/uc?id={CLF_ID}",
+        'classifier.pkl', quiet=False)
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
 import numpy as np
