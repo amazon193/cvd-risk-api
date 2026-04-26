@@ -1,6 +1,6 @@
 fastapi
 uvicorn
-numpy
+numpy==1.24.3
 opencv-python-headless
 Pillow
 scikit-learn
