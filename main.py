@@ -1,21 +1,49 @@
-import gdown
+from fastapi import FastAPI, File, UploadFile
+from fastapi.responses import JSONResponse
+import numpy as np
+import cv2
+import io
+import base64
+import joblib
 import os
+import gdown
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from PIL import Image
+from skimage.morphology import skeletonize
+from skimage import measure
+from scipy import ndimage
+import tensorflow as tf
 
-UNET_ID   = "1pEEdGBJBsC9IrTENSO1li75sdhPkpZHQ"
-CLF_ID    = "1Ffxs3HVyHpigYYo9cXd5nt8HTaVMz_3V"
-SCALER_ID = "10BvriDIde-6M0_DgPDHX5MMc8KW6U-9z"
-
+# Download models from Google Drive
 if not os.path.exists('unet_model.h5'):
-    gdown.download(id=UNET_ID,
-        output='unet_model.h5', quiet=False)
+    gdown.download(
+        id="1pEEdGBJBsC9IrTENSO1li75sdhPkpZHQ",
+        output="unet_model.h5",
+        quiet=False,
+        fuzzy=True
+    )
 
 if not os.path.exists('scaler.pkl'):
-    gdown.download(id=SCALER_ID,
-        output='scaler.pkl', quiet=False)
+    gdown.download(
+        id="10BvriDIde-6M0_DgPDHX5MMc8KW6U-9z",
+        output="scaler.pkl",
+        quiet=False,
+        fuzzy=True
+    )
 
 if not os.path.exists('classifier.pkl'):
-    gdown.download(id=CLF_ID,
-        output='classifier.pkl', quiet=False)
+    gdown.download(
+        id="1Ffxs3HVyHpigYYo9cXd5nt8HTaVMz_3V",
+        output="classifier.pkl",
+        quiet=False,
+        fuzzy=True
+    )
+
+unet   = tf.keras.models.load_model('unet_model.h5')
+scaler = joblib.load('scaler.pkl')
+clf    = joblib.load('classifier.pkl')
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
 import numpy as np
