@@ -1,26 +1,21 @@
 import gdown
 import os
 
-# Google Drive file IDs (paste yours here)
-UNET_ID       = "https://drive.google.com/file/d/1pEEdGBJBsC9IrTENSO1li75sdhPkpZHQ/view?usp=drive_link"
-CLF_ID     = "https://drive.google.com/file/d/1Ffxs3HVyHpigYYo9cXd5nt8HTaVMz_3V/view?usp=drive_link"
-SCALER_ID        = "https://drive.google.com/file/d/10BvriDIde-6M0_DgPDHX5MMc8KW6U-9z/view?usp=drive_link"
+UNET_ID   = "1pEEdGBJBsC9IrTENSO1li75sdhPkpZHQ"
+CLF_ID    = "1Ffxs3HVyHpigYYo9cXd5nt8HTaVMz_3V"
+SCALER_ID = "10BvriDIde-6M0_DgPDHX5MMc8KW6U-9z"
 
-# Download models if not already present
 if not os.path.exists('unet_model.h5'):
-    gdown.download(
-        f"https://drive.google.com/uc?id={UNET_ID}",
-        'unet_model.h5', quiet=False)
+    gdown.download(id=UNET_ID,
+        output='unet_model.h5', quiet=False)
 
 if not os.path.exists('scaler.pkl'):
-    gdown.download(
-        f"https://drive.google.com/uc?id={SCALER_ID}",
-        'scaler.pkl', quiet=False)
+    gdown.download(id=SCALER_ID,
+        output='scaler.pkl', quiet=False)
 
 if not os.path.exists('classifier.pkl'):
-    gdown.download(
-        f"https://drive.google.com/uc?id={CLF_ID}",
-        'classifier.pkl', quiet=False)
+    gdown.download(id=CLF_ID,
+        output='classifier.pkl', quiet=False)
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
 import numpy as np
