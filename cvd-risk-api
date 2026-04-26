@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+numpy
+opencv-python-headless
+Pillow
+scikit-learn
+scikit-image
+scipy
+matplotlib
+tensorflow
+joblib
+python-multipart
