@@ -7,6 +7,7 @@ scikit-learn
 scikit-image
 scipy
 matplotlib
-tensorflow
+tensorflow==2.13.0
 joblib
 python-multipart
+h5py
